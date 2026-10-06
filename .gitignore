@@ -1,0 +1,6 @@
+/public/assets/pages/
+/public/assets/ocr-pages.json
+/assets/taxi-drivers.pdf
+/work/
+/node_modules/
+.DS_Store
