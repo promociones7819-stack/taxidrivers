@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - name: Check out source
         uses: actions/checkout@v4
       - name: Upload reader
