@@ -20,5 +20,18 @@ mkdir -p "$OUT/pages" "$WORK"
 pdftoppm -f 1 -l 120 -jpeg -r 130 -jpegopt quality=86 "$PDF" "$OUT/pages/page"
 pdftoppm -f 7 -l 14 -jpeg -r 180 -jpegopt quality=90 "$PDF" "$WORK/ocr"
 swift "$ROOT/scripts/vision-ocr.swift" "$WORK"/ocr-*.jpg "$OUT/ocr-pages.json"
+python3 - "$OUT" <<'PY'
+import json, pathlib, sys
+assets = pathlib.Path(sys.argv[1])
+records = json.loads((assets / "ocr-pages.json").read_text())
+parts = assets / "ocr-pages"
+parts.mkdir(exist_ok=True)
+manifest = []
+for record in records:
+    name = f"{record['page']:03}.json"
+    (parts / name).write_text(json.dumps(record, separators=(",", ":")))
+    manifest.append(f"./assets/ocr-pages/{name}")
+(assets / "ocr-manifest.json").write_text(json.dumps(manifest, separators=(",", ":")))
+PY
 
 echo "120 páginas generadas y OCR preparado para las páginas 7–14."
