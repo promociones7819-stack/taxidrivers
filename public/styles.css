@@ -8,8 +8,9 @@
 
 /* Selección de frases directamente sobre la página escaneada: el texto OCR es transparente y no cambia el aspecto del libro. */
 .page-wrap #phraseLayer{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.phrase-word{position:absolute;display:block;margin:0;padding:0;border:0;color:transparent;background:transparent;line-height:1;white-space:pre;overflow:visible;pointer-events:auto;cursor:text;-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+.phrase-word{position:absolute;display:block;margin:0;padding:0;border:0;color:transparent;background:transparent;line-height:1;white-space:pre;overflow:visible;pointer-events:none;cursor:text;-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 .phrase-word::selection{color:transparent;background:#527be866}
 .page-wrap.phrase-selecting #phraseLayer{pointer-events:auto;touch-action:pan-y}
+.page-wrap.phrase-selecting .phrase-word{pointer-events:auto}
 .page-wrap.phrase-selecting #wordLayer .word-hit{pointer-events:none}
 .tool-btn.active#phraseModeBtn{background:#edf2ff;border-color:#b8c8ff;color:#315fdf}
